@@ -1,5 +1,5 @@
 # brief-infra
-Brief web3 deployment
+Web3 Brief deployment
 
 ## Installation instructions
 ### Full package
