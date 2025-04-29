@@ -7,3 +7,4 @@ Web3 Brief deployment
 ### Manual install
 
 ### Readonly install
+No account/wallet support
