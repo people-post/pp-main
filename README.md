@@ -5,3 +5,5 @@ Web3 Brief deployment
 ### Full package
 ### Network based install
 ### Manual install
+
+### Readonly install
