@@ -1,0 +1,35 @@
+[Unit]
+Description=InterPlanetary File System (IPFS) daemon
+Documentation=https://docs.ipfs.tech/
+After=network.target
+
+[Service]
+
+# enable for 1-1024 port listening
+#AmbientCapabilities=CAP_NET_BIND_SERVICE 
+# enable to specify a custom path see docs/environment-variables.md for further documentations
+#Environment=IPFS_PATH=/custom/ipfs/path
+# enable to specify a higher limit for open files/connections
+#LimitNOFILE=1000000
+
+#don't use swap
+MemorySwapMax=0
+
+# Don't timeout on startup. Opening the IPFS repo can take a long time in some cases (e.g., when
+# badger is recovering) and migrations can delay startup.
+#
+# Ideally, we'd be a bit smarter about this but there's no good way to do that without hooking
+# systemd dependencies deeper into go-ipfs.
+TimeoutStartSec=infinity
+
+Type=notify
+User=ipfs
+Group=ipfs
+StateDirectory=ipfs
+#Environment=IPFS_PATH="${HOME}"
+ExecStart=/usr/local/bin/ipfs daemon --init --migrate
+Restart=on-failure
+KillSignal=SIGINT
+
+[Install]
+WantedBy=default.target
