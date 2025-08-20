@@ -1,2 +1,2 @@
-# brief-infra
-Web3 Brief deployment
+# devops
+Web3 deployment
