@@ -6,6 +6,10 @@ then
 fi
 mkdir $WORK_DIR
 
+DIST_DIR_NAME=dist
+DIST_DIR_PATH=$WORK_DIR/$DIST_DIR_NAME
+mkdir $DIST_DIR_PATH
+
 REPO_PATH=$WORK_DIR/repo
 git clone git@github.com:nfsc-brief-web3/personal-node.git $REPO_PATH
 
@@ -35,3 +39,13 @@ node --experimental-sea-config $SEA_CONFIG_PATH
 # Prepare binary
 cp $(command -v node) $APP_PATH
 npx postject $APP_PATH NODE_SEA_BLOB $SEA_BLOB_PATH  --sentinel-fuse NODE_SEA_FUSE_fce680ab2cc467b6e072b8b5df1996b2
+
+cp install.sh $DIST_DIR_PATH/.
+
+# Packaging
+PACKAGE_PATH=package.tar
+# Create tarball
+tar -C $WORK_DIR -cf $PACKAGE_PATH $DIST_DIR_NAME
+
+# Zip package
+gzip -f $PACKAGE_PATH
