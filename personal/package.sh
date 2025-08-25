@@ -41,8 +41,16 @@ git pull
 ./package.sh
 popd
 
-BUNDLE_JS_PATH=$WORK_DIR/bundle.js
-cp $PN_REPO_DIR/obj/bundle.js $BUNDLE_JS_PATH
+FRONTEND_PKG_SRC_PATH=$FRONTEND_REPO_DIR/web3.tar.gz
+FRONTEND_DIR_PATH=$DIST_DIR_PATH/static
+tar -C $DIST_DIR_PATH -zxvf $FRONTEND_PKG_SRC_PATH
+# Folder name "web3" is from fronend packaging script
+mv $DIST_DIR_PATH/web3 $FRONTEND_DIR_PATH
+
+BACKEND_JS_SRC_PATH=$PN_REPO_DIR/obj/bundle.js
+BACKEND_JS_PATH=$DIST_DIR_PATH/host.js
+
+cp $BACKEND_JS_SRC_PATH $BACKEND_JS_PATH
 
 SEA_CONFIG_PATH=$WORK_DIR/sea_config.json
 SEA_BLOB_PATH=$WORK_DIR/sea-prep.blob
@@ -51,7 +59,7 @@ APP_PATH=$WORK_DIR/node
 # Prepare blob
 SEA_CONFIG="
 {
-    \"main\": \"${BUNDLE_JS_PATH}\",
+    \"main\": \"${BACKEND_JS_PATH}\",
     \"output\": \"${SEA_BLOB_PATH}\"
 }
 "
