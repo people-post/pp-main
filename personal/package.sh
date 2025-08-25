@@ -70,7 +70,10 @@ node --experimental-sea-config $SEA_CONFIG_PATH
 cp $(command -v node) $APP_PATH
 npx postject $APP_PATH NODE_SEA_BLOB $SEA_BLOB_PATH  --sentinel-fuse NODE_SEA_FUSE_fce680ab2cc467b6e072b8b5df1996b2
 
-cp install.sh $DIST_DIR_PATH/.
+cp install.sh $DIST_DIR_PATH/install.sh
+chmod +x $DIST_DIR_PATH/install.sh
+cp node.service $DIST_DIR_PATH/.
+cp ipfs.service $DIST_DIR_PATH/.
 
 # Packaging
 PACKAGE_PATH=package.tar
