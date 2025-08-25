@@ -1,4 +1,11 @@
 #!/bin/bash
+# Dir prep
+REPO_DIR=repo
+if [ ! -d $REPO_DIR ]
+then
+    mkdir $REPO_DIR
+fi
+
 WORK_DIR=obj
 if [ -d $WORK_DIR ]
 then
@@ -10,17 +17,21 @@ DIST_DIR_NAME=dist
 DIST_DIR_PATH=$WORK_DIR/$DIST_DIR_NAME
 mkdir $DIST_DIR_PATH
 
-REPO_PATH=$WORK_DIR/repo
-git clone git@github.com:nfsc-brief-web3/personal-node.git $REPO_PATH
+# Repo operation
+PN_REPO_DIR=$REPO_DIR/pn
+if [ ! -d $PN_REPO_DIR ]
+then
+    git clone git@github.com:nfsc-brief-web3/personal-node.git $PN_REPO_DIR
+fi
 
-BUNDLE_JS_PATH=$WORK_DIR/bundle.js
-
-pushd $REPO_PATH
+pushd $PN_REPO_DIR
+git pull
 npm i
 ./package.sh
 popd
 
-cp $REPO_PATH/obj/bundle.js $BUNDLE_JS_PATH
+BUNDLE_JS_PATH=$WORK_DIR/bundle.js
+cp $PN_REPO_DIR/obj/bundle.js $BUNDLE_JS_PATH
 
 SEA_CONFIG_PATH=$WORK_DIR/sea_config.json
 SEA_BLOB_PATH=$WORK_DIR/sea-prep.blob
