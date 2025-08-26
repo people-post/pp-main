@@ -100,7 +100,10 @@ cp -r static $TMP_DIR
 
 # Server code
 echo "Copying server code..."
-cp host.js $WORK_DIR_PATH/server/index.js
+cp host.js $SERVER_DIR_PATH/index.js
+pushd $SERVER_DIR_PATH
+npm i sharp
+popd
 
 # Config.json file
 CONFIG_FILE_PATH=$SERVER_DIR_PATH/config.json

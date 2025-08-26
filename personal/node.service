@@ -7,6 +7,7 @@ After=network.target
 Type=simple
 User=__USER__
 Group=__GROUP__
+WorkingDirectory=__WORK_DIR__
 StandardOutput=append:__WORK_DIR__/stdout.txt
 StandardError=append:__WORK_DIR__/stderr.txt
 ExecStart=__NODE_BIN__ __WORK_DIR__/index.js -d __WORK_DIR__
