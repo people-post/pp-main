@@ -74,6 +74,8 @@ cp install.sh $DIST_DIR_PATH/install.sh
 chmod +x $DIST_DIR_PATH/install.sh
 cp node.service $DIST_DIR_PATH/node.service.template
 cp ipfs.service $DIST_DIR_PATH/ipfs.service.template
+cp config.json $DIST_DIR_PATH/config.json.template
+cp users.json $DIST_DIR_PATH/users.json.template
 
 # Packaging
 PACKAGE_PATH=package.tar

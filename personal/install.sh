@@ -110,7 +110,8 @@ CONFIG_FILE_PATH=$SERVER_DIR_PATH/config.json
 if [ ! -f $CONFIG_FILE_PATH ]
 then
     echo "Initializing server config..."
-    # TODO:
+    cp config.json.template $SERVER_DIR_PATH/config.json
+    cp users.json.template $SERVER_DIR_PATH/users.json
 fi
 
 # Restart service
