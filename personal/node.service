@@ -1,0 +1,18 @@
+[Unit]
+Description=NFSC brief personal node
+Documentation=https://www.nfscbrief.com/
+After=network.target
+
+[Service]
+Type=simple
+User=__USER__
+Group=__GROUP__
+WorkingDirectory=__WORK_DIR__
+StandardOutput=append:__WORK_DIR__/stdout.txt
+StandardError=append:__WORK_DIR__/stderr.txt
+ExecStart=__NODE_BIN__ __WORK_DIR__/index.js -d __WORK_DIR__
+Restart=on-failure
+KillSignal=SIGINT
+
+[Install]
+WantedBy=multi-user.target

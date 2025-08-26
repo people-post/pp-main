@@ -1,0 +1,19 @@
+[Unit]
+Description=InterPlanetary File System (IPFS) daemon
+Documentation=https://docs.ipfs.tech/
+After=network.target
+
+[Service]
+MemorySwapMax=0
+TimeoutStartSec=infinity
+Type=notify
+User=__USER__
+Group=__GROUP__
+StateDirectory=ipfs
+Environment=IPFS_PATH="__WORK_DIR__"
+ExecStart=__IPFS_BIN__ daemon --init --migrate --init-profile=lowpower
+Restart=on-failure
+KillSignal=SIGINT
+
+[Install]
+WantedBy=default.target
