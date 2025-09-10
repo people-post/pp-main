@@ -21,7 +21,7 @@ mkdir $DIST_DIR_PATH
 PN_REPO_DIR=$REPO_DIR/pn
 if [ ! -d $PN_REPO_DIR ]
 then
-    git clone git@github.com:nfsc-brief-web3/personal-node.git $PN_REPO_DIR
+    git clone git@github.com:people-post/pp-node.git $PN_REPO_DIR
 fi
 
 FRONTEND_REPO_DIR=$REPO_DIR/frontend
@@ -33,6 +33,8 @@ fi
 pushd $PN_REPO_DIR
 git pull
 npm i
+# Update pp js lib
+npm i pp-js-lib
 ./package.sh
 popd
 
