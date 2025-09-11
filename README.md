@@ -24,7 +24,7 @@ DB_41 <--> USER_3(User 3):::User
 USER_1 <--> DB_PUBLIC[(Optional centralized public node)]:::Public
 USER_2 <--> DB_PUBLIC
 DB_PUBLIC <--> USER_3
-DB_PUBLIC <--> DB_42[(pp-node 2)]:::Public
+CLOUD(((Cloud))):::Public <--> DB_42[(pp-node 2)]:::Public
 
 subgraph "User 3"
 USER_3
@@ -36,6 +36,7 @@ DB_42 <--> USER_4
 end
 
 DB_PUBLIC <--> USER_N(Other users):::User
+DB_PUBLIC <--> CLOUD
 
 linkStyle 0 stroke:lightcoral;
 linkStyle 1 stroke:lightcoral;
