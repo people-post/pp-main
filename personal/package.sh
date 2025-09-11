@@ -27,7 +27,7 @@ fi
 FRONTEND_REPO_DIR=$REPO_DIR/frontend
 if [ ! -d $FRONTEND_REPO_DIR ]
 then
-    git clone git@github.com:nfsc-brief-team/frontend.git $FRONTEND_REPO_DIR
+    git clone git@github.com:people-post/pp-app.git $FRONTEND_REPO_DIR
 fi
 
 pushd $PN_REPO_DIR
