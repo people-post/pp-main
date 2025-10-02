@@ -2,6 +2,8 @@
 # ------- Reading inputs --------
 USER=$(id -un)
 GROUP=$(id -gn)
+KERNEL=$(uname --kernel-name)
+MACHINE=$(uname --machine)
 
 read -p "Work dir root [$HOME/data]:" WORK_DIR_PATH
 WORK_DIR_PATH=${WORK_DIR_PATH:-$HOME/data}
@@ -31,7 +33,24 @@ then
     echo "Ipfs exists."
 else
     echo "Installing ipfs..."
-    wget https://github.com/ipfs/kubo/releases/download/v0.36.0/kubo_v0.36.0_linux-arm64.tar.gz
+    if [[ "$KERNEL" == "Linux" ]]; then
+        pn_os="linux"
+    elif [[ "$KERNEL" == "Darwin" ]]; then
+        pn_os="darwin"
+    else
+        echo "Unsupported kernel: $KERNEL"
+        exit 1
+    fi
+    if [[ "$MACHINE" == "x86_64" ]]; then
+        pn_machine="amd64"
+    elif [[ "$MACHINE" == "aarch64" ]]; then
+        pn_machine="arm64"
+    else
+        echo "Unsupported machine harware: $MACHINE"
+        exit 1
+    fi
+    package_name=kubo_v0.36.0_${pn_os}-${pn_machine}.tar.gz
+    wget https://github.com/ipfs/kubo/releases/download/v0.36.0/${package_name}
     tar -xvzf kubo_v0.36.0_linux-arm64.tar.gz
     sudo mv kubo/ipfs /usr/local/bin/ipfs 
 fi
@@ -76,6 +95,7 @@ echo "Preparing node service..."
 cp node.service.template node.service
 sed -i "s/__USER__/${USER}/g" node.service
 sed -i "s/__GROUP__/${GROUP}/g" node.service
+sed -i "s|__IPFS_PATH__|${IPFS_DATA_DIR_PATH}|g" node.service
 sed -i "s|__WORK_DIR__|${SERVER_DIR_PATH}|g" node.service
 sed -i "s|__NODE_BIN__|${NODE_BIN_PATH}|g" node.service
 

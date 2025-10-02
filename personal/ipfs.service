@@ -10,7 +10,7 @@ Type=notify
 User=__USER__
 Group=__GROUP__
 StateDirectory=ipfs
-Environment=IPFS_PATH="__WORK_DIR__"
+Environment="IPFS_PATH=__WORK_DIR__"
 ExecStart=__IPFS_BIN__ daemon --init --migrate --init-profile=lowpower
 Restart=on-failure
 KillSignal=SIGINT
