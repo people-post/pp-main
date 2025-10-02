@@ -95,6 +95,7 @@ echo "Preparing node service..."
 cp node.service.template node.service
 sed -i "s/__USER__/${USER}/g" node.service
 sed -i "s/__GROUP__/${GROUP}/g" node.service
+sed -i "s|__IPFS_PATH__|${IPFS_DATA_DIR_PATH}|g" node.service
 sed -i "s|__WORK_DIR__|${SERVER_DIR_PATH}|g" node.service
 sed -i "s|__NODE_BIN__|${NODE_BIN_PATH}|g" node.service
 
