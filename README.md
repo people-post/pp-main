@@ -58,7 +58,8 @@ style SGU4 fill:#EEF,stroke:#DDF
 ```mermaid
 graph TB
 LIB(pp-js-lib) --> NODE(pp-node)
-APP(pp-app) --> MAIN(pp-main)
+API(pp-api) --> APP(pp-app)
+APP --> MAIN(pp-main)
 NODE --> MAIN
 ```
 
